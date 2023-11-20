@@ -54,13 +54,29 @@ def fitPhase(RVE, vertices, phases):
     a = {}
     for id in RVE:
         mu_x, mu_y, mu_z, Sigma, L, R = fitEllipsoid(id, RVE, vertices)
-        # Calculate equivalent diameter, scaled with the resolution
+        ## Calculate equivalent diameter, scaled with the resolution
         if phases[id] in d:
             d[phases[id]].append(np.cbrt(np.prod(L)) * 2 * res)
         else:
-            d[phases[i]] = [np.cbrt(np.prod(L)) * 2 * res]
-        # Calculate grain aspect ratio
-        if phases[i] in a:
-            a[phases[i]].append(min(L)/max(L))
+            d[phases[id]] = [np.cbrt(np.prod(L)) * 2 * res]
+        ## Calculate grain aspect ratio
+        if phases[id] in a:
+            a[phases[id]].append(min(L)/max(L))
         else:
-            a[phases[i]] = [min(L)/max(L)]
+            a[phases[id]] = [min(L)/max(L)]
+
+    ## Return the dictionaries
+    return d, a
+
+
+def fitRVE(data):
+    """
+        Returns the size and shape distribution of the grains belong to each phase in an RVE.
+        Input:
+            RVE      : RVE dictionary from fitellipsoid/preprocessing
+            vertices : vertices dictionary from fitellipsoid/preprocessing
+            phases   : phases dictionary from fitellipsoid/preprocessing
+        Output:
+            d : size dictionary with phase ID as key and the corresponding distribution as value
+            a : shape dictionary with phase ID as key and the corresponding distribution as value
+    """
