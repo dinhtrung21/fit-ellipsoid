@@ -5,7 +5,7 @@ Run the file by first open Git Bash (on Windows, or just terminal on Linux) in a
 
 ```
 $ git clone https://github.com/dinhtrung21/fit-ellipsoid.git # Only for the first run
-$ pip install –r requirements.txt # Can skip if already install NumPy, Matplotlib and Scipy
+$ pip3 install –r requirements.txt                            # NumPy, Matplotlib, Scipy
 $ python3 evaluate.py
 ```
 ## Methodology
