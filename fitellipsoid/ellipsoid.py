@@ -1,17 +1,18 @@
+from fitellipsoid import preprocessing
 import numpy as np
 
 def fitEllipsoid(id, RVE, vertices):
     """
         Returns the best-fitted ellipsoid to a 3D region defined by a set of voxels' vertices on xyz-coordinate.
-        Input:
-            id       : our grain ID
-            RVE      : RVE dictionary from fitellipsoid/preprocessing
-            vertices : vertices dictionary from fitellipsoid/preprocessing
-        Output:
-            mu_x, mu_y, mu_z: the center of our ellipsoid
-            Sigma           : a matrix such that inv(Sigma) define our quadric surface
-            L               : an array containing the length of the semi-axes of our ellipsoid
-            R               : the rotational matrix
+            Input:
+                id       : our grain ID
+                RVE      : RVE dictionary from fitellipsoid/preprocessing
+                vertices : vertices dictionary from fitellipsoid/preprocessing
+            Output:
+                mu_x, mu_y, mu_z: the center of our ellipsoid
+                Sigma           : a matrix such that inv(Sigma) define our quadric surface
+                L               : an array containing the length of the semi-axes of our ellipsoid
+                R               : the rotational matrix
     """
     ## Get the grain's vertices and volume
     A = np.transpose(vertices[id])
@@ -38,16 +39,17 @@ def fitEllipsoid(id, RVE, vertices):
     return mu_x, mu_y, mu_z, Sigma, L, R
 
 
-def fitPhase(RVE, vertices, phases):
+def fitPhase(RVE, vertices, phases, res):
     """
         Returns the size and shape distribution of the grains belong to each phase.
-        Input:
-            RVE      : RVE dictionary from fitellipsoid/preprocessing
-            vertices : vertices dictionary from fitellipsoid/preprocessing
-            phases   : phases dictionary from fitellipsoid/preprocessing
-        Output:
-            d : size dictionary with phase ID as key and the corresponding distribution as value
-            a : shape dictionary with phase ID as key and the corresponding distribution as value
+            Input:
+                RVE      : RVE dictionary from fitellipsoid/preprocessing
+                vertices : vertices dictionary from fitellipsoid/preprocessing
+                phases   : phases dictionary from fitellipsoid/preprocessing
+                res      : RVE resolution
+            Output:
+                d : size dictionary with phase ID as key and the corresponding distribution as value
+                a : shape dictionary with phase ID as key and the corresponding distribution as value
     """
     ## Dictionaries of size and shape to return
     d = {}
@@ -73,10 +75,14 @@ def fitRVE(data):
     """
         Returns the size and shape distribution of the grains belong to each phase in an RVE.
         Input:
-            RVE      : RVE dictionary from fitellipsoid/preprocessing
-            vertices : vertices dictionary from fitellipsoid/preprocessing
-            phases   : phases dictionary from fitellipsoid/preprocessing
+            data: data path
         Output:
             d : size dictionary with phase ID as key and the corresponding distribution as value
             a : shape dictionary with phase ID as key and the corresponding distribution as value
     """
+    ## Extract data from data path
+    RVE, vertices, phases = preprocessing.preprocess(data)
+    ## Dictionaries of size and shape by phases
+    d, a = fitPhase(RVE, vertices, phases)
+    ## Return the results
+    return d, a

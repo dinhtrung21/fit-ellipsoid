@@ -5,12 +5,12 @@ import matplotlib.pyplot as plt
 def plot_ellipsoid(mu_x, mu_y, mu_z, L, R):
     """
         Returns an array of points on the quadric surface of the ellipsoid we want to plot.
-        Input:
-            mu_x, mu_y, mu_z : the center of our ellipsoid
-            L                : an array containing the length of the semi-axes of our ellipsoid
-            R                : the rotational matrix
-        Output:
-            ellipsoid : an array of points on the surface of the ellipsoid 
+            Input:
+                mu_x, mu_y, mu_z : the center of our ellipsoid
+                L                : an array containing the length of the semi-axes of our ellipsoid
+                R                : the rotational matrix
+            Output:
+                ellipsoid : an array of points on the surface of the ellipsoid 
     """
     ## Pre-transformed center
     mu_ = np.transpose(R) @ [mu_x, mu_y, mu_z]

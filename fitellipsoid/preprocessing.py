@@ -1,14 +1,14 @@
 import numpy as np
 
-def preprocess(data):
+def preprocess(data: str):
     """
-        Process input data into usable arrays for calculation of best-fitted ellipsoid
-        Input:
-            data: data path
-        Output:
-            RVE     : dictionaries of RVE coordinates
-            vertices: dictionaries of voxels' vertices
-            phases  : dictionaries of voxels' phases
+        Process input data into usable arrays for calculation of best-fitted ellipsoid.
+            Input:
+                data: data path
+            Output:
+                RVE     : dictionaries of RVE coordinates
+                vertices: dictionaries of voxels' vertices
+                phases  : dictionaries of voxels' phases
     """
     ## Dictionaries to return
     RVE      = {}
