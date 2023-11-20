@@ -1,8 +1,8 @@
 import numpy as np
 
-def grains(data):
+def preprocess(data):
     """
-        Generate a batch of images randomly sampled from a training microstructure
+        Process input data into usable arrays for calculation of best-fitted ellipsoid
         :param data: data path
         :return: 3 dictionaries of RVE coordinates, voxels' vertices and voxels' phases
     """
