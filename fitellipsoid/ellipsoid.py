@@ -7,7 +7,7 @@ def fitEllipsoid(id, RVE, vertices):
             id       : our grain ID
             RVE      : RVE dictionary from fitellipsoid/preprocessing
             vertices : vertices dictionary from fitellipsoid/preprocessing
-        Output
+        Output:
             mu_x, mu_y, mu_z: the center of our ellipsoid
             Sigma           : a matrix such that inv(Sigma) define our quadric surface
             L               : an array containing the length of the semi-axes of our ellipsoid
@@ -35,4 +35,32 @@ def fitEllipsoid(id, RVE, vertices):
     R = np.transpose(R)
     
     ## Return the results
-    return mu_x, mu_y, mu_z, Sigma, L, R    
+    return mu_x, mu_y, mu_z, Sigma, L, R
+
+
+def fitPhase(RVE, vertices, phases):
+    """
+        Returns the size and shape distribution of the grains belong to each phase.
+        Input:
+            RVE      : RVE dictionary from fitellipsoid/preprocessing
+            vertices : vertices dictionary from fitellipsoid/preprocessing
+            phases   : phases dictionary from fitellipsoid/preprocessing
+        Output:
+            d : size dictionary with phase ID as key and the corresponding distribution as value
+            a : shape dictionary with phase ID as key and the corresponding distribution as value
+    """
+    ## Dictionaries of size and shape to return
+    d = {}
+    a = {}
+    for id in RVE:
+        mu_x, mu_y, mu_z, Sigma, L, R = fitEllipsoid(id, RVE, vertices)
+        # Calculate equivalent diameter, scaled with the resolution
+        if phases[id] in d:
+            d[phases[id]].append(np.cbrt(np.prod(L)) * 2 * res)
+        else:
+            d[phases[i]] = [np.cbrt(np.prod(L)) * 2 * res]
+        # Calculate grain aspect ratio
+        if phases[i] in a:
+            a[phases[i]].append(min(L)/max(L))
+        else:
+            a[phases[i]] = [min(L)/max(L)]
