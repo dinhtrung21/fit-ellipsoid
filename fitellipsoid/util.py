@@ -28,6 +28,7 @@ def plot_ellipsoid(mu_x, mu_y, mu_z, L, R):
     return ellipsoid
 
 
+
 def euler_angles(R):
     """
         Calculate the Euler angles from a given 3D rotational matrix.
@@ -42,6 +43,7 @@ def euler_angles(R):
     return a, b, g
 
 
+
 def hellinger_lognorm(mu_1, mu_2, sigma_1, sigma_2):
     """
         Calculate the Hellinger distance of the lognormal size distribution.
@@ -53,3 +55,10 @@ def hellinger_lognorm(mu_1, mu_2, sigma_1, sigma_2):
     """
     H = np.sqrt(1 - np.sqrt(2*sigma_1*sigma_2/(sigma_1**2 + sigma_2**2))*np.exp(-1/4 * (mu_1 - mu_2)**2/(sigma_1**2 + sigma_2**2)))
     return H
+
+
+def plot_size(d):
+    """
+    Simple plotter for all the different graphs of size distribution in the grains
+    """
+    return d

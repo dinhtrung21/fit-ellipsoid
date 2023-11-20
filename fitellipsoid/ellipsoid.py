@@ -39,6 +39,7 @@ def fitEllipsoid(id, RVE, vertices):
     return mu_x, mu_y, mu_z, Sigma, L, R
 
 
+
 def fitPhase(RVE, vertices, phases, res):
     """
         Returns the size and shape distribution of the grains belong to each phase.
@@ -69,6 +70,7 @@ def fitPhase(RVE, vertices, phases, res):
 
     ## Return the dictionaries
     return d, a
+
 
 
 def fitRVE(data):
