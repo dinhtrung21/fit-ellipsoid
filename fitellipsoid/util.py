@@ -30,7 +30,7 @@ def plot_ellipsoid(mu_x, mu_y, mu_z, L, R):
 
 def euler_angles(R):
     """
-        Calculate the Euler angles from a given #D rotational matrix.
+        Calculate the Euler angles from a given 3D rotational matrix.
             Input:
                 R : the rotational matrix
             Output:
@@ -40,3 +40,16 @@ def euler_angles(R):
     b = np.arctan2(-R[2][0], np.sqrt(R[2][1]**2 + R[2][2]**2))
     g = np.arctan2(R[1][0], R[0][0])
     return a, b, g
+
+
+def hellinger_lognorm(mu_1, mu_2, sigma_1, sigma_2):
+    """
+        Calculate the Hellinger distance of the lognormal size distribution.
+            Input:
+                mu_1, sigma_1 : parameters of the experimental distribution
+                mu_2, sigma_2 : parameters of the RVE-generated distribution
+            Output:
+                H : Hellinger distance
+    """
+    H = np.sqrt(1 - np.sqrt(2*sigma_1*sigma_2/(sigma_1**2 + sigma_2**2))*np.exp(-1/4 * (mu_1 - mu_2)**2/(sigma_1**2 + sigma_2**2)))
+    return H
