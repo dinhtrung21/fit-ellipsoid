@@ -26,3 +26,17 @@ def plot_ellipsoid(mu_x, mu_y, mu_z, L, R):
 
     ## Return the array
     return ellipsoid
+
+
+def euler_angles(R):
+    """
+        Calculate the Euler angles from a given #D rotational matrix.
+            Input:
+                R : the rotational matrix
+            Output:
+                a, b, g : (improper) Euler angles from extrinsic rotation
+    """
+    a = np.arctan2(R[2][1], R[2][2])
+    b = np.arctan2(-R[2][0], np.sqrt(R[2][1]**2 + R[2][2]**2))
+    g = np.arctan2(R[1][0], R[0][0])
+    return a, b, g
