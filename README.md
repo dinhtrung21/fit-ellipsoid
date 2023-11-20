@@ -1,4 +1,4 @@
-# Evaluation of multiphase RVEs by fitting ellipsoids to 3D grains
+# multiphase RVE evaluation by fitting ellipsoids to 3D grains
 Fitting a 3D ellipsoid to an arbitrary 3D shape for RVE evaluation. 
 ## Running the code
 Run the file by first open Git Bash (on Windows, or just terminal on Linux) in a location you want to store the code and run:
