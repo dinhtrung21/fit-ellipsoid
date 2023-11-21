@@ -1,6 +1,21 @@
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import lognorm, beta
+
+def mkdr(ind):
+    try:
+        os.mkdir(f'result/{ind}')
+    except FileExistsError:
+        print(f'Directory result/{ind} already exists. Enter new RVE number or hit enter to overwrite.')
+        new = input()
+        if new == '':
+            return f'result/{ind}'
+        else:
+            mkdr(input)
+            return f'result/{input}'
+
+
 
 def plot_ellipsoid(mu_x, mu_y, mu_z, L, R):
     """
