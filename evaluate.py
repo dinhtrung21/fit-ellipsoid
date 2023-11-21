@@ -19,3 +19,4 @@ n = 5
 for i in range(1, n + 1):
     data_path = f'data/{i}/QP_FFT_data'
     d, a = ellipsoid.fitRVE(data_path)
+    util.graph_plot(d, a, i, mu, sigma, alpha, beta)
