@@ -56,8 +56,36 @@ def hellinger_lognorm(mu_1, mu_2, sigma_1, sigma_2):
     return H
 
 
-def plot_size(d):
+def graph_plot(d, a, ind, mu, sigma, ap, be):
     """
-    Simple plotter for all the different graphs of size distribution in the grains
+        Simple plotter for all the different phases of size and shape distribution in the grains of an RVE
+            Input:
+                d, a     :  size and shape dictionaries with phase ID as key and the corresponding distribution as value
+                ind      :  index of our RVE
+                mu, sigma:  size experimental distribution parameter of each phase
+                ap, be   :  shape experimental distribution parameter of each phase
     """
+    fig, axes = plt.subplots(4, 2, figsize=(15,20))
+    for i in range(4):
+        ## Plot the RVE equivalent diameter distribution
+        axes[i, 0].hist(d[i+1], color='g', bins=np.linspace(0, max(d[i+1]), 50), alpha=0.5, density=True)
+        axes[i, 0].plot(np.linspace(min(d[i+1]), max(d[i+1]), 50), lognorm.pdf(np.linspace(min(d[i+1]), max(d[i+1]), 50), sigma[i], scale=np.exp(mu[i])), 
+                    'r-', lw=2, label='Experimental distribution')
+        axes[i, 0].set_xlabel("Equivalent diameter")
+        axes[i, 0].set_ylabel("Density")
+        axes[i, 0].set_title(f"Phase {i+1} - RVE equivalent diameter distribution")
+        axes[i, 0].legend()
+
+        ## Plot the RVE grain aspect ratio distribution
+        axes[i, 1].hist(a[i+1], color='g', bins=np.linspace(0, 1, 50), alpha=0.5, density=True)
+        axes[i, 1].plot(np.linspace(min(a[i+1]), max(a[i+1]), 50), beta.pdf(np.linspace(min(a[i+1]), max(a[i+1]), 50), ap[i], be[i]), 
+                    'r-', lw=2, label='Experimental distribution')
+        axes[i, 1].set_xlabel("Grain aspect ratio")
+        axes[i, 1].set_ylabel("Density")
+        axes[i, 1].set_title(f"Phase {i+1} - RVE grain aspect ratio distribution")
+        axes[i, 1].legend()
+
+    plt.savefig(f'result/{ind}/Distribution of RVE.png')
+    plt.close()
+
     return d
