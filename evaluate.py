@@ -2,10 +2,10 @@ from fitellipsoid import ellipsoid, util
 import numpy as np
 
 ## Input our parameters for size/shape distribution of each phases
-mu       = [1, 1, 1, 1]
-sigma    = [1, 1, 1, 1]
-alpha    = [1, 1, 1, 1]
-beta     = [1, 1, 1, 1]
+mu       = [0.50, 0.91, -0.3, 0.81]
+sigma    = [0.75, 0.57, 0.79, 0.80]
+alpha    = [3.82, 3.54, 3.72, 3.08]
+beta     = [2.99, 2.85, 3.24, 3.13]
 fraction = [1, 1, 1, 1]
 
 ## RVE constants, including dimensions and resolution
