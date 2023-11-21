@@ -14,7 +14,6 @@ def plot_ellipsoid(mu_x, mu_y, mu_z, L, R):
     """
     ## Pre-transformed center
     mu_ = np.transpose(R) @ [mu_x, mu_y, mu_z]
-
     ellipsoid = []
     for i in range(0,100000):                               # Here, the size of our array is 100000
         x, y, z = np.random.uniform(-1, 1, 3)               # Simulate points on a sphere
@@ -22,10 +21,8 @@ def plot_ellipsoid(mu_x, mu_y, mu_z, L, R):
         [x, y, z] = [x, y, z] * L + mu_
         p = R @ [x, y, z]                                   # Rotate the ellipsoid
         ellipsoid += [p]                                    # Add the point into the array
-
     ## Return the array
     return ellipsoid
-
 
 
 def euler_angles(R):
@@ -40,7 +37,6 @@ def euler_angles(R):
     b = np.arctan2(-R[2][0], np.sqrt(R[2][1]**2 + R[2][2]**2))
     g = np.arctan2(R[1][0], R[0][0])
     return a, b, g
-
 
 
 def hellinger_lognorm(mu_1, mu_2, sigma_1, sigma_2):
@@ -75,7 +71,6 @@ def graph_plot(d, a, ind, mu, sigma, ap, be):
         axes[i, 0].set_ylabel("Density")
         axes[i, 0].set_title(f"Phase {i+1} - RVE equivalent diameter distribution")
         axes[i, 0].legend()
-
         ## Plot the RVE grain aspect ratio distribution
         axes[i, 1].hist(a[i+1], color='g', bins=np.linspace(0, 1, 50), alpha=0.5, density=True)
         axes[i, 1].plot(np.linspace(min(a[i+1]), max(a[i+1]), 50), beta.pdf(np.linspace(min(a[i+1]), max(a[i+1]), 50), ap[i], be[i]), 
@@ -84,8 +79,6 @@ def graph_plot(d, a, ind, mu, sigma, ap, be):
         axes[i, 1].set_ylabel("Density")
         axes[i, 1].set_title(f"Phase {i+1} - RVE grain aspect ratio distribution")
         axes[i, 1].legend()
-
     plt.savefig(f'result/{ind}/Distribution of RVE.png')
     plt.close()
 
-    return d

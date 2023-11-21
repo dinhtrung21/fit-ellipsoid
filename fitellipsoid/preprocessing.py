@@ -14,7 +14,6 @@ def preprocess(data: str):
     RVE      = {}
     vertices = {}
     phases   = {}
-
     file_open = open(data, 'r')
     ## Fill in the RVE dictionaries
     for line in file_open:
@@ -24,7 +23,6 @@ def preprocess(data: str):
             RVE[grainID].append([int(line_split[3]), int(line_split[4]), int(line_split[5]), int(line_split[-1])])
         else:
             RVE[grainID] = [[int(line_split[3]), int(line_split[4]), int(line_split[5]), int(line_split[-1])]]
-    
     ## Fill in the vertices & phases dictionaries
     for i in RVE:
         x, y, z, phase = np.transpose(RVE[i])
@@ -38,6 +36,5 @@ def preprocess(data: str):
         u = np.append(u, np.transpose([x, y, z]) - [1, 1, 1], axis=0)
         vertices[i] = np.unique(u, axis=0)
         phases[i]   = phase[0]
-
     ## Return the preprocessed data
     return RVE, vertices, phases
