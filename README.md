@@ -16,6 +16,6 @@ python3 evaluate.py
 The results are stored in ```fit-ellipsoid/result``` for reference.
 
 ## Development
-To adjust the RVE parameters or experimental constants, see ```evaluate.py```.
-If you are interested in the algorithms of the fitting method, see ```ellipsoid.py```.
-If you are interested in the algorithms of the Hellinger distance, see ```util.py```.
+-  To adjust the RVE parameters or experimental constants, see ```evaluate.py```.
+-  If you are interested in the algorithms of the fitting method, see ```ellipsoid.py```.
+-  If you are interested in the algorithms of the Hellinger distance, see ```util.py```.
