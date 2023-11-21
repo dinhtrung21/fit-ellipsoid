@@ -17,6 +17,7 @@ The automatic evaluation process can be initiated by running ```evaluate.py``` f
 ```
 python3 evaluate.py
 ```
+After the first time, you can run the code straight from the terminal on Windows (PowerShell) without using Git Bash.
 
 ## Results
 The results are stored in ```fit-ellipsoid/result``` for reference.
