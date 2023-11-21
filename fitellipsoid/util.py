@@ -4,16 +4,16 @@ import matplotlib.pyplot as plt
 from scipy.stats import lognorm, beta
 
 def mkdr(ind):
+    """
+        Create a new directory to save the result of the fitting.
+            Input:
+                ind: RVE number
+    """
+    path = os.path.abspath('result')
     try:
-        os.mkdir(f'result/{ind}')
+        os.mkdir(path + '/' + str(ind))
     except FileExistsError:
-        print(f'Directory result/{ind} already exists. Enter new RVE number or hit enter to overwrite.')
-        new = input()
-        if new == '':
-            return f'result/{ind}'
-        else:
-            mkdr(input)
-            return f'result/{input}'
+        return f'result/{ind}'
 
 
 
@@ -94,6 +94,6 @@ def graph_plot(d, a, ind, mu, sigma, ap, be):
         axes[i, 1].set_ylabel("Density")
         axes[i, 1].set_title(f"Phase {i+1} - RVE grain aspect ratio distribution")
         axes[i, 1].legend()
-    plt.savefig(f'result/{ind}/Distribution of RVE.png')
+    plt.savefig('result/' + str(ind) + '/Distribution of RVE.png')
     plt.close()
 
