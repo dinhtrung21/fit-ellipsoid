@@ -68,11 +68,12 @@ def fitPhase(RVE, vertices, phases, res):
     return d, a
 
 
-def fitRVE(data):
+def fitRVE(data, res):
     """
         Returns the size and shape distribution of the grains belong to each phase in an RVE.
         Input:
             data: data path
+            res : RVE resolution
         Output:
             d : size dictionary with phase ID as key and the corresponding distribution as value
             a : shape dictionary with phase ID as key and the corresponding distribution as value
@@ -80,6 +81,6 @@ def fitRVE(data):
     ## Extract data from data path
     RVE, vertices, phases = preprocessing.preprocess(data)
     ## Dictionaries of size and shape by phases
-    d, a = fitPhase(RVE, vertices, phases)
+    d, a = fitPhase(RVE, vertices, phases, res)
     ## Return the results
     return d, a
