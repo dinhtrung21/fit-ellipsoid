@@ -16,7 +16,6 @@ def mkdr(ind):
         return f'result/{ind}'
 
 
-
 def plot_ellipsoid(mu_x, mu_y, mu_z, L, R):
     """
         Returns an array of points on the quadric surface of the ellipsoid we want to plot.
