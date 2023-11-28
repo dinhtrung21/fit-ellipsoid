@@ -54,16 +54,18 @@ def fitPhase(RVE, vertices, phases, res):
     a = {}
     for id in RVE:
         mu_x, mu_y, mu_z, Sigma, L, R = fitEllipsoid(id, RVE, vertices)
-        ## Calculate equivalent diameter, scaled with the resolution
-        if phases[id] in d:
-            d[phases[id]].append(np.cbrt(np.prod(L)) * 2 * res)
-        else:
-            d[phases[id]] = [np.cbrt(np.prod(L)) * 2 * res]
-        ## Calculate grain aspect ratio
-        if phases[id] in a:
-            a[phases[id]].append(min(L)/max(L))
-        else:
-            a[phases[id]] = [min(L)/max(L)]
+        ## Only consider the ellipsoid if it is not a sphere
+        if min(L)/max(L) < 1:
+            ## Calculate equivalent diameter, scaled with the resolution
+            if phases[id] in d:
+                d[phases[id]].append(np.cbrt(np.prod(L)) * 2 * res)
+            else:
+                d[phases[id]] = [np.cbrt(np.prod(L)) * 2 * res]
+            ## Calculate grain aspect ratio
+            if phases[id] in a:
+                a[phases[id]].append(min(L)/max(L))
+            else:
+                a[phases[id]] = [min(L)/max(L)]
     ## Return the dictionaries
     return d, a
 
