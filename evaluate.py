@@ -1,5 +1,6 @@
 from fitellipsoid import ellipsoid, util
 import numpy as np
+import os
 
 ## Input our parameters for size/shape distribution of each phases
 mu       = [0.50, 0.91, -0.3, 0.81]
@@ -12,8 +13,8 @@ fraction = [0.09, 0.08, 0.23, 0.45]
 dim = 64
 res = 1
 
-## Number of RVEs for evaluation
-n = 10
+## Automatically get the number of RVEs for evaluation
+n = len([name for name in os.listdir('data') if os.path.isdir(os.path.join('data', name))])
 
 
 ## Function to automatically calculate the difference between the RVE and the experimental data
