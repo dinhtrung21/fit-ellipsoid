@@ -41,7 +41,7 @@ def RVE_difference(d, a):
         ap_, be_ = util.fit_beta(a[i])
         H_a     += util.hellinger_beta(ap_, alpha[i-1], be_, beta[i-1])
         ## Calculate the difference
-        E += fraction[i] * (H_d + H_a)/(2 * np.sum(fraction))
+        E += fraction[i-1] * (H_d + H_a)/(2 * np.sum(fraction))
     ## Return the difference
     return H_d, H_a, E
 
