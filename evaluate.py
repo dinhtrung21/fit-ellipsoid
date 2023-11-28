@@ -40,7 +40,7 @@ def RVE_difference(d, a):
         ## Calculate the Hellinger distance of the shape distribution
         ap_, be_ = util.fit_beta(a[i])
         H_a     += fraction[i-1] * util.hellinger_beta(ap_, alpha[i-1], be_, beta[i-1])/np.sum(fraction)
-        ## Calculate the difference
+    ## Calculate the difference
     E = (H_d + H_a)/2
     ## Return the difference
     return H_d, H_a, E
