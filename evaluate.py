@@ -36,10 +36,10 @@ def RVE_difference(d, a):
     for i in d:
         ## Calculate the Hellinger distance of the size distribution
         mu_, sigma_ = util.fit_lognorm(d[i])
-        H_d        += util.hellinger_lognorm(mu_, mu[i], sigma_, sigma[i])
+        H_d        += util.hellinger_lognorm(mu_, mu[i-1], sigma_, sigma[i-1])
         ## Calculate the Hellinger distance of the shape distribution
         ap_, be_ = util.fit_beta(a[i])
-        H_a     += util.hellinger_beta(ap_, ap[i], be_, be[i])
+        H_a     += util.hellinger_beta(ap_, ap[i-1], be_, be[i-1])
         ## Calculate the difference
         E += fraction[i] * (H_d + H_a)/(2 * np.sum(fraction))
     ## Return the difference
