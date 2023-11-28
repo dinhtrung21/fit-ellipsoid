@@ -54,6 +54,34 @@ def euler_angles(R):
     return a, b, g
 
 
+def fit_lognorm(d):
+    """
+        Fit a lognormal distribution to the given data.
+            Input:
+                d : size data to fit (array)
+            Output:
+                mu, sigma : parameters of the lognormal distribution
+    """
+    ## Fit the lognormal distribution
+    shape, loc, scale = lognorm.fit(d, floc=0)
+    ## Extract the parameters
+    mu, sigma = np.log(scale), shape
+    return mu, sigma
+
+
+def fit_beta(a):
+    """
+        Fit a beta distribution to the given data.
+            Input:
+                a : shape data to fit (array)
+            Output:
+                ap, be : parameters of the beta distribution
+    """
+    ## Fit the beta distribution
+    ap, be, loc, scale = beta.fit(a, floc=0, fscale=1)
+    return ap, be
+
+
 def hellinger_lognorm(mu_1, mu_2, sigma_1, sigma_2):
     """
         Calculate the Hellinger distance of the lognormal size distribution.
