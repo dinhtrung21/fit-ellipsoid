@@ -9,11 +9,11 @@ beta     = [2.99, 2.85, 3.24, 3.13]
 fraction = [0.0858, 0.0045, 0.5693, 0.2839]
 
 ## RVE constants, including dimensions and resolution
-dim = 100
-res = 0.2
+dim = 64
+res = 1
 
 ## Number of RVEs for evaluation
-n = 5
+n = 10
 
 
 ## Function to automatically calculate the difference between the RVE and the experimental data
