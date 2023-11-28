@@ -117,12 +117,18 @@ def graph_plot(d, a, ind, mu, sigma, ap, be):
                 mu, sigma:  size experimental distribution parameter of each phase
                 ap, be   :  shape experimental distribution parameter of each phase
     """
+    ## Plot the figures
     fig, axes = plt.subplots(4, 2, figsize=(15,20))
     for i in range(4):
+        ## Calculate the parameters of the fitted distributions
+        mu_fit, sigma_fit = fit_lognorm(d[i+1])
+        ap_fit, be_fit    = fit_beta(a[i+1])
         ## Plot the RVE equivalent diameter distribution
         axes[i, 0].hist(d[i+1], color='g', bins=np.linspace(0, max(d[i+1]), 50), alpha=0.5, density=True)
         axes[i, 0].plot(np.linspace(min(d[i+1]), max(d[i+1]), 50), lognorm.pdf(np.linspace(min(d[i+1]), max(d[i+1]), 50), sigma[i], scale=np.exp(mu[i])), 
                     'r-', lw=2, label='Experimental distribution')
+        axes[i, 0].plot(np.linspace(min(d[i+1]), max(d[i+1]), 50), lognorm.pdf(np.linspace(min(d[i+1]), max(d[i+1]), 50), sigma_fit, scale=np.exp(mu_fit)),
+                    'b--', lw=2, label='RVE-generated distribution')
         axes[i, 0].set_xlabel("Equivalent diameter")
         axes[i, 0].set_ylabel("Density")
         axes[i, 0].set_title(f"Phase {i+1} - RVE equivalent diameter distribution")
@@ -131,6 +137,8 @@ def graph_plot(d, a, ind, mu, sigma, ap, be):
         axes[i, 1].hist(a[i+1], color='g', bins=np.linspace(0, 1, 50), alpha=0.5, density=True)
         axes[i, 1].plot(np.linspace(min(a[i+1]), max(a[i+1]), 50), beta.pdf(np.linspace(min(a[i+1]), max(a[i+1]), 50), ap[i], be[i]), 
                     'r-', lw=2, label='Experimental distribution')
+        axes[i, 1].plot(np.linspace(min(a[i+1]), max(a[i+1]), 50), beta.pdf(np.linspace(min(a[i+1]), max(a[i+1]), 50), ap_fit, be_fit),
+                    'b--', lw=2, label='RVE-generated distribution')
         axes[i, 1].set_xlabel("Grain aspect ratio")
         axes[i, 1].set_ylabel("Density")
         axes[i, 1].set_title(f"Phase {i+1} - RVE grain aspect ratio distribution")
