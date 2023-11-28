@@ -15,6 +15,37 @@ res = 0.2
 ## Number of RVEs for evaluation
 n = 5
 
+
+## Function to automatically calculate the difference between the RVE and the experimental data
+def RVE_difference(d, a):
+    """
+        Evaluate the difference between the RVE and the experimental data using the Hellinger distance.
+            Input:
+                d : size dictionary of the RVE
+                a : shape dictionary of the RVE
+            Output:
+                H_d: total Hellinger distance of the size distribution
+                H_a: total Hellinger distance of the shape distribution
+                E : the differene between the RVE and the experimental data
+    """
+    ## Initialize the difference
+    H_d = 0
+    H_a = 0
+    E   = 0
+    ## Loop through each phase
+    for i in d:
+        ## Calculate the Hellinger distance of the size distribution
+        mu_, sigma_ = util.fit_lognorm(d[i])
+        H_d        += util.hellinger_lognorm(mu_, mu[i], sigma_, sigma[i])
+        ## Calculate the Hellinger distance of the shape distribution
+        ap_, be_ = util.fit_beta(a[i])
+        H_a     += util.hellinger_beta(ap_, ap[i], be_, be[i])
+        ## Calculate the difference
+        E += fraction[i] * (H_d + H_a)/(2 * np.sum(fraction))
+    ## Return the difference
+    return H_d, H_a, E
+
+
 ## Loop through each RVE
 for i in range(1, n + 1):
     data_path = f'data/{i}/QP_FFT_data.txt'
