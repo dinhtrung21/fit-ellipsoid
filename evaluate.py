@@ -6,7 +6,7 @@ mu       = [0.50, 0.91, -0.3, 0.81]
 sigma    = [0.75, 0.57, 0.79, 0.80]
 alpha    = [3.82, 3.54, 3.72, 3.08]
 beta     = [2.99, 2.85, 3.24, 3.13]
-fraction = [0.0858, 0.0045, 0.5693, 0.2839]
+fraction = [0.09, 0.08, 0.23, 0.45]
 
 ## RVE constants, including dimensions and resolution
 dim = 64
@@ -41,7 +41,7 @@ def RVE_difference(d, a):
         ap_, be_ = util.fit_beta(a[i])
         H_a     += fraction[i-1] * util.hellinger_beta(ap_, alpha[i-1], be_, beta[i-1])/np.sum(fraction)
         ## Calculate the difference
-        E += (H_d + H_a)/2
+    E = (H_d + H_a)/2
     ## Return the difference
     return H_d, H_a, E
 
@@ -56,9 +56,10 @@ for i in range(1, n + 1):
     util.graph_plot(d, a, i, mu, sigma, alpha, beta)
     ## Calculate the difference between the RVE and the experimental data
     H_d, H_a, E = RVE_difference(d, a)
+    print(f'RVE #{i} has size error of {H_d}, shape error of {H_a}, average error is {E}.')
     ## Update the minimum error and the best RVE
-    if H_d < min_error:
-        min_error = H_d
+    if E < min_error:
+        min_error = E
         best_RVE  = i
 
 ## Print the best RVE
