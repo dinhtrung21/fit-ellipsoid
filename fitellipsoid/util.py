@@ -78,7 +78,7 @@ def fit_beta(a):
                 ap, be : parameters of the beta distribution
     """
     ## Fit the beta distribution
-    ap, be, loc, scale = beta.fit(a, floc=0, fscale=1)
+    ap, be, loc, scale = beta.fit(a)
     return ap, be
 
 
