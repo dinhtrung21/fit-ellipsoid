@@ -52,3 +52,5 @@ for i in range(1, n + 1):
     d, a = ellipsoid.fitRVE(data_path, res)
     util.mkdr(i)
     util.graph_plot(d, a, i, mu, sigma, alpha, beta)
+    ## Calculate the difference between the RVE and the experimental data
+    H_d, H_a, E = RVE_difference(d, a)
