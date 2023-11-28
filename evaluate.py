@@ -6,7 +6,7 @@ mu       = [0.50, 0.91, -0.3, 0.81]
 sigma    = [0.75, 0.57, 0.79, 0.80]
 alpha    = [3.82, 3.54, 3.72, 3.08]
 beta     = [2.99, 2.85, 3.24, 3.13]
-fraction = [1, 1, 1, 1]
+fraction = [0.0858, 0.0045, 0.5693, 0.2839]
 
 ## RVE constants, including dimensions and resolution
 dim = 100
