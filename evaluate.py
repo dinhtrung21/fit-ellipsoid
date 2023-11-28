@@ -47,6 +47,8 @@ def RVE_difference(d, a):
 
 
 ## Loop through each RVE
+min_error = 1e10            # Initialize the minimum error
+best_RVE  = 0               # Initialize the best RVE
 for i in range(1, n + 1):
     data_path = f'data/{i}/QP_FFT_data.txt'
     d, a = ellipsoid.fitRVE(data_path, res)
@@ -54,3 +56,10 @@ for i in range(1, n + 1):
     util.graph_plot(d, a, i, mu, sigma, alpha, beta)
     ## Calculate the difference between the RVE and the experimental data
     H_d, H_a, E = RVE_difference(d, a)
+    ## Update the minimum error and the best RVE
+    if E < min_error:
+        min_error = E
+        best_RVE  = i
+
+## Print the best RVE
+print(f'The best RVE is RVE #{best_RVE} with an error of {min_error}.')
