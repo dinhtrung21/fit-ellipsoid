@@ -2,6 +2,7 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import lognorm, beta
+from scipy import special
 
 def mkdr(ind):
     """
@@ -63,6 +64,19 @@ def hellinger_lognorm(mu_1, mu_2, sigma_1, sigma_2):
                 H : Hellinger distance
     """
     H = np.sqrt(1 - np.sqrt(2*sigma_1*sigma_2/(sigma_1**2 + sigma_2**2))*np.exp(-1/4 * (mu_1 - mu_2)**2/(sigma_1**2 + sigma_2**2)))
+    return H
+
+
+def hellinger_beta(ap_1, ap_2, be_1, be_2):
+    """
+        Calculate the Hellinger distance of the beta shape distribution.
+            Input:
+                ap_1, be_1 : parameters of the experimental distribution
+                ap_2, be_2 : parameters of the RVE-generated distribution
+            Output:
+                H : Hellinger distance
+    """
+    H = np.sqrt(1 - special.beta((ap_1 + ap_2)/2, (be_1 + be_2)/2)/np.sqrt(special.beta(ap_1, be_1) * special.beta(ap_2, be_2)))
     return H
 
 
