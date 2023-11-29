@@ -73,7 +73,7 @@ def phase_fraction(RVE):
             fraction[RVE[i][0][3]] = 1
     ## Normalize the fraction
     for i in fraction:
-        result(i-1) = fraction[i]/len(RVE)
+        result[i-1] = fraction[i]/len(RVE)
     ## Return the fraction
     return result
 
