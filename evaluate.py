@@ -1,4 +1,4 @@
-from fitellipsoid import ellipsoid, util
+from fitellipsoid import preprocessing, ellipsoid, util
 import numpy as np
 import os
 
@@ -18,20 +18,23 @@ n = len([name for name in os.listdir('data') if os.path.isdir(os.path.join('data
 
 
 ## Function to automatically calculate the difference between the RVE and the experimental data
-def RVE_difference(d, a):
+def RVE_difference(d, a, frac):
     """
         Evaluate the difference between the RVE and the experimental data using the Hellinger distance.
             Input:
-                d : size dictionary of the RVE
-                a : shape dictionary of the RVE
+                d    : size dictionary of the RVE
+                a    : shape dictionary of the RVE
+                frac : fraction array of the RVE
             Output:
                 H_d: total Hellinger distance of the size distribution
                 H_a: total Hellinger distance of the shape distribution
+                H_f: Hellinger distance of the fraction distribution
                 E : the differene between the RVE and the experimental data
     """
     ## Initialize the difference
     H_d = 0
     H_a = 0
+    H_f = 0
     E   = 0
     ## Loop through each phase
     for i in d:
@@ -39,25 +42,31 @@ def RVE_difference(d, a):
         mu_, sigma_ = util.fit_lognorm(d[i])
         H_d        += util.hellinger_lognorm(mu_, mu[i-1], sigma_, sigma[i-1])/4
         ## Calculate the Hellinger distance of the shape distribution
-        ap_, be_ = util.fit_beta(a[i])
-        H_a     += util.hellinger_beta(ap_, alpha[i-1], be_, beta[i-1])/4
+        ap_, be_    = util.fit_beta(a[i])
+        H_a        += util.hellinger_beta(ap_, alpha[i-1], be_, beta[i-1])/4
+    ## Calculate the Hellinger distance of the fraction distribution
+    H_f = util.hellinger(fraction, frac)
     ## Calculate the difference
-    E = (H_d + H_a)/2
+    E = (H_d + H_a + H_f)/3
     ## Return the difference
-    return H_d, H_a, E
+    return H_d, H_a, H_f, E
 
 
 ## Loop through each RVE
 min_error = 1e10            # Initialize the minimum error
 best_RVE  = 0               # Initialize the best RVE
 for i in range(1, n + 1):
+    ## Read the data
     data_path = f'data/{i}/QP_FFT_data.txt'
+    RVE, vertices, phases = preprocessing.preprocess(data_path)
+    ## Fit the RVE and calculate phase fraction
     d, a = ellipsoid.fitRVE(data_path, res)
     util.mkdr(i)
     util.graph_plot(d, a, i, mu, sigma, alpha, beta)
+    frac = util.phase_fraction(RVE)
     ## Calculate the difference between the RVE and the experimental data
-    H_d, H_a, E = RVE_difference(d, a)
-    print(f'RVE #{i} has size error of {H_d}, shape error of {H_a}, average error is {E}.')
+    H_d, H_a, H_f, E = RVE_difference(d, a, frac)
+    print(f'RVE #{i} has size error of {H_d}, shape error of {H_a}, fraction error of {H_f}, and average error is {E}.')
     ## Update the minimum error and the best RVE
     if E < min_error:
         min_error = E
