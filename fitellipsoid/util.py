@@ -106,7 +106,7 @@ def fit_beta(a):
     return ap, be
 
 
-def hellinger_dot(p, q):
+def hellinger(p, q):
     """Hellinger distance between two discrete distributions. 
         Input:
             p, q : two discrete distributions
