@@ -54,6 +54,30 @@ def euler_angles(R):
     return a, b, g
 
 
+def phase_fraction(RVE):
+    """
+        Calculate the fraction of each phase in the RVE.
+            Input:
+                RVE : RVE dictionary from fitellipsoid/preprocessing
+            Output:
+                rêsult : fraction array with corresponding fraction as value
+    """
+    ## Initialize the fraction array
+    fraction = {}
+    result   = np.zeros(4)
+    ## Calculate the fraction of each phase
+    for i in RVE:
+        if RVE[i][0][3] in fraction:
+            fraction[RVE[i][0][3]] += 1
+        else:
+            fraction[RVE[i][0][3]] = 1
+    ## Normalize the fraction
+    for i in fraction:
+        result(i-1) = fraction[i]/len(RVE)
+    ## Return the fraction
+    return result
+
+
 def fit_lognorm(d):
     """
         Fit a lognormal distribution to the given data.
