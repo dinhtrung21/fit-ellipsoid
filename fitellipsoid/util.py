@@ -106,6 +106,18 @@ def fit_beta(a):
     return ap, be
 
 
+def hellinger_dot(p, q):
+    """Hellinger distance between two discrete distributions. 
+        Input:
+            p, q : two discrete distributions
+        Output:
+            H : Hellinger distance
+    """
+    z = np.sqrt(p) - np.sqrt(q)
+    H = np.sqrt(z @ z / 2)
+    return H
+
+
 def hellinger_lognorm(mu_1, mu_2, sigma_1, sigma_2):
     """
         Calculate the Hellinger distance of the lognormal size distribution.
