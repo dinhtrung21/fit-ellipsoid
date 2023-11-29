@@ -8,6 +8,7 @@ sigma    = [0.75, 0.57, 0.79, 0.80]
 alpha    = [3.82, 3.54, 3.72, 3.08]
 beta     = [2.99, 2.85, 3.24, 3.13]
 fraction = [0.09, 0.08, 0.23, 0.45]
+fraction = fraction/np.sum(fraction)  # Normalize the fraction
 
 ## RVE constants, including dimensions and resolution
 dim = 64
