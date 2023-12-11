@@ -56,6 +56,7 @@ def RVE_difference(d, a, frac):
 ## Loop through each RVE
 min_error = 1e10            # Initialize the minimum error
 best_RVE  = 0               # Initialize the best RVE
+print('Evaluating the RVEs...')
 for i in range(1, n + 1):
     ## Read the data
     data_path = f'data/{i}/QP_FFT_data.txt'
