@@ -12,11 +12,11 @@ First, open Git Bash (on Windows, or just terminal on Linux) in a location you w
 ```
 git clone https://github.com/dinhtrung21/fit-ellipsoid.git
 ```
-Then we open VSCode to the folder:
+Then, on Git Bash we open VSCode to the folder:
 ```
-code .
+code fit-ellipsoid
 ```
-Make sure that you have install Python for VSCode terminal, this can be easily checked by the command ```python3``` on VSCode terminal. Then, we install the needed packages using this line:
+From this point we will work on VSCode terminal. Make sure that you have install Python for VSCode terminal, this can be easily checked by the command ```python3```. Then, we install the needed packages using this line:
 ```
 pip3 install –r requirements.txt
 ```
