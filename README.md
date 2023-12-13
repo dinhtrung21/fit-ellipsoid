@@ -11,9 +11,16 @@ The report of the method is stored in ```fit-ellipsoid/report/Fitting an ellipso
 First, open Git Bash (on Windows, or just terminal on Linux) in a location you want to store the code and run (only for the first time):
 ```
 git clone https://github.com/dinhtrung21/fit-ellipsoid.git
-pip3 install –r requirements.txt      # NumPy, Matplotlib, SciPy
 ```
-The automatic evaluation process can be initiated by running ```evaluate.py``` from the command line as following:
+Then we open VSCode to the folder:
+```
+code .
+```
+Make sure that you have install Python for VSCode terminal, this can be easily checked by the command ```python3``` on VSCode terminal. Then, we install the needed packages using this line:
+```
+pip3 install –r requirements.txt
+```
+Finally, the automatic evaluation process can be initiated by running ```evaluate.py``` from the command line as following:
 ```
 python3 evaluate.py
 ```
