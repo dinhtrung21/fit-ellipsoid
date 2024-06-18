@@ -52,27 +52,26 @@ def RVE_difference(d, a, frac):
     ## Return the difference
     return H_d, H_a, H_f, E
 
-
-## Loop through each RVE
-min_error = 1e10            # Initialize the minimum error
-best_RVE  = 0               # Initialize the best RVE
-print('Evaluating the RVEs...')
-for i in range(1, n + 1):
-    ## Read the data
-    data_path = f'data/{i}/QP_FFT_data.txt'
-    RVE, vertices, phases = preprocessing.preprocess(data_path)
-    ## Fit the RVE and calculate phase fraction
-    d, a = ellipsoid.fitRVE(data_path, res)
-    util.mkdr(i)
-    util.graph_plot(d, a, i, mu, sigma, alpha, beta)
-    frac = util.phase_fraction(RVE)
-    ## Calculate the difference between the RVE and the experimental data
-    H_d, H_a, H_f, E = RVE_difference(d, a, frac)
-    print(f'RVE #{i} has size error of {H_d}, shape error of {H_a}, fraction error of {H_f}, and average error is {E}.')
-    ## Update the minimum error and the best RVE
-    if E < min_error:
-        min_error = E
-        best_RVE  = i
-
-## Print the best RVE
-print(f'The best RVE is RVE #{best_RVE} with an error of {min_error}.')
+if __name__ == '__main__':
+    ## Loop through each RVE
+    min_error = 1e10            # Initialize the minimum error
+    best_RVE  = 0               # Initialize the best RVE
+    print('Evaluating the RVEs...')
+    for i in range(1, n + 1):
+        ## Read the data
+        data_path = f'data/{i}/QP_FFT_data.txt'
+        RVE, vertices, phases = preprocessing.preprocess(data_path)
+        ## Fit the RVE and calculate phase fraction
+        d, a = ellipsoid.fitRVE(data_path, res)
+        util.mkdr(i)
+        util.graph_plot(d, a, i, mu, sigma, alpha, beta)
+        frac = util.phase_fraction(RVE)
+        ## Calculate the difference between the RVE and the experimental data
+        H_d, H_a, H_f, E = RVE_difference(d, a, frac)
+        print(f'RVE #{i} has size error of {H_d}, shape error of {H_a}, fraction error of {H_f}, and average error is {E}.')
+        ## Update the minimum error and the best RVE
+        if E < min_error:
+            min_error = E
+            best_RVE  = i
+    ## Print the best RVE
+    print(f'The best RVE is RVE #{best_RVE} with an error of {min_error}.')
