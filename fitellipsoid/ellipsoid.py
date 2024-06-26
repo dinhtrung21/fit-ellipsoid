@@ -30,8 +30,6 @@ def fitEllipsoid(id, RVE, vertices):
     ## Scale the axes by volume
     scaling = np.cbrt(3*n/(4*np.pi*np.sqrt(np.prod(L))))
     L = np.sqrt(L) * scaling
-    ## Correct the rotation matrix
-    R = np.transpose(R)
     
     ## Return the results
     return mu_x, mu_y, mu_z, Sigma, L, R
